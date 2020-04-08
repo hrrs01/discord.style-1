@@ -3,13 +3,6 @@ import TemplateCard from '~/components/TemplateCard'
 
 const { heading, leading } = attributes
 
-const Plus = (props) => (
-  <svg viewBox="0 0 24 24" {...props}>
-    <path d="M0 0h24v24H0z" fill="none" />
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" />
-  </svg>
-)
-
 const Home = () => {
   return (
     <>
@@ -29,7 +22,7 @@ const Home = () => {
       </div>
       <div className="py-8 sm:py-10 md:py-12">
         <div className="container">
-        <a href="template1" className="row -mb-8">
+          <div className="row -mb-8">
             <TemplateCard
               title="Lorem ipsum"
               name="Tom Cook"
@@ -60,7 +53,7 @@ const Home = () => {
               downloads={123}
               likes={47}
             />
-          </a>
+          </div>
         </div>
       </div>
     </>

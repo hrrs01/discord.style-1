@@ -3,12 +3,43 @@ import TemplateCard from '~/components/TemplateCard'
 
 const { heading, leading } = attributes
 
-const Plus = (props) => (
-  <svg viewBox="0 0 24 24" {...props}>
-    <path d="M0 0h24v24H0z" fill="none" />
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" />
-  </svg>
-)
+const Category = ({ title }) => {
+  return (
+    <div className="uppercase font-bold pt-2 pb-2 text-xs">
+      <i className="fas fa-caret-down text-discord-400" aria-hidden={true} />
+      {' ' + title}
+    </div>
+  )
+}
+
+const Channel = ({ title }) => {
+  return (
+    <div className="block pl-2 hover:bg-discord-700 hover:rounded-full align-middle lowercase">
+      <span
+        className="pr-2 text-2xl text-discord-500 align-middle"
+        aria-hidden={true}
+      >
+        #
+      </span>
+      {' ' + title}
+    </div>
+  )
+}
+
+const Role = ({ color, title }) => {
+  return (
+    <div
+      className="border-2 inline-flex p-4 items-center px-3 py-1 leading-4 mx-1 mb-2 rounded-full text-white lowercase"
+      style={{ borderColor: color }}
+    >
+      <div
+        className="w-3 h-3 mr-2 rounded-full"
+        style={{ background: color }}
+      />
+      <span>{title}</span>
+    </div>
+  )
+}
 
 const Home = () => {
   return (
@@ -31,101 +62,24 @@ const Home = () => {
               </p>
             </div>
             <div className="col md:w-1/3 lg:w-1/2 self-center hidden md:block">
-              <div className="text-discord-500 bg-discord-200 mx-auto w-1/2 p-5 rounded-md">
-                <div className="uppercase font-bold pt-2 pb-2 text-xs">
-                  <i class="fas fa-caret-down text-discord-400"></i>{' '}
-                  categoryname
-                </div>
-                <div className="block pl-2 hover:bg-discord-700 hover:rounded-full align-middle">
-                  <span class="pr-2 text-2xl text-discord-500 align-middle">
-                    #
-                  </span>{' '}
-                  textchannel
-                </div>
-                <div className="uppercase font-bold pt-2 pb-2 text-xs">
-                  <i class="fas fa-caret-down text-discord-400"></i>{' '}
-                  categoryname
-                </div>
-                <div
-                  className="block pl-2 hover:bg-discord-700 hover:rounded-full"
-                  align-middle
-                >
-                  <span class="pr-2 text-2xl text-discord-500 align-middle">
-                    #
-                  </span>{' '}
-                  textchannel
-                </div>
-                <div className="block pl-2 hover:bg-discord-700 hover:rounded-full align-middle">
-                  <span class="pr-2 text-2xl text-discord-500 align-middle">
-                    #
-                  </span>{' '}
-                  textchannel
-                </div>
-                <div className="block pl-2 hover:bg-discord-700 hover:rounded-full align-middle">
-                  <span class="pr-2 text-2xl text-discord-500 align-middle">
-                    #
-                  </span>{' '}
-                  textchannel
-                </div>
-                <div className="uppercase font-bold pt-2 pb-2 text-xs">
-                  <i class="fas fa-caret-down text-discord-400"></i>{' '}
-                  categoryname
-                </div>
-                <div className="block pl-2 hover:bg-discord-700 hover:rounded-full align-middle">
-                  <span class="pr-2 text-2xl text-discord-500 align-middle ">
-                    #
-                  </span>{' '}
-                  textchannel
-                </div>
-                <div className="block pl-2 hover:bg-discord-700 hover:rounded-full align-middle">
-                  <span class="pr-2 text-xl text-discord-500 align-middle">
-                    {' '}
-                    <i class="fad fa-volume"> </i>
-                  </span>{' '}
-                  textchannel
-                </div>
+              <div className="text-discord-500 bg-discord-200 mx-auto w-1/2 p-5 rounded-md mb-4">
+                <Category title="Category Name" />
+                <Channel title="TextChannel" />
+                <Category title="Category Name" />
+                <Channel title="TextChannel" />
+                <Channel title="TextChannel" />
+                <Channel title="TextChannel" />
+                <Category title="Category Name" />
+                <Channel title="TextChannel" />
+                <Channel title="TextChannel" />
               </div>
-              <p>&nbsp;</p>
               <div className="text-discord-500 bg-discord-200 mx-auto w-1/2 p-5 rounded-md">
-                <div className="block pl-2 hover:bg-discord-700 hover:rounded-full align-middle">
-                  <div class=" py-1 px-4 inline-block align-middle rounded-full border-discord-success border-solid border-2 text-white">
-                    <span className="align-middle inline-block h-4 mr-2 w-3 pr-4 rounded-full bg-discord-success ">
-                      &nbsp;
-                    </span>
-                    role
-                  </div>
-                </div>
-                <div className="block pl-2 hover:bg-discord-700 hover:rounded-full align-middle">
-                  <div class=" py-1 px-4 inline-block align-middle rounded-full border-discord-success border-solid border-2 text-white">
-                    <span className="align-middle inline-block h-4 mr-2 w-3 pr-4 rounded-full bg-discord-success ">
-                      &nbsp;
-                    </span>
-                    role
-                  </div>
-                </div>
-                <div className="block pl-2 hover:bg-discord-700 hover:rounded-full align-middle">
-                  <div class=" py-1 px-4 inline-block align-middle rounded-full border-discord-success border-solid border-2 text-white">
-                    <span className="align-middle inline-block h-4 mr-2 w-3 pr-4 rounded-full bg-discord-success ">
-                      &nbsp;
-                    </span>
-                    role
-                  </div>
-                </div>
-                <div className="block pl-2 hover:bg-discord-700 hover:rounded-full align-middle">
-                  <div class=" py-1 px-4 inline-block align-middle rounded-full border-discord-success border-solid border-2 text-white">
-                    <span className="align-middle inline-block h-4 mr-2 w-3 pr-4 rounded-full bg-discord-success ">
-                      &nbsp;
-                    </span>
-                    role
-                  </div>
-                </div>
-                <div className="block pl-2 hover:bg-discord-700 hover:rounded-full align-middle">
-                  <div class=" py-1 px-4 inline-block align-middle rounded-full border-discord-success border-solid border-2 text-white">
-                    <span className="align-middle inline-block h-4 mr-2 w-3 pr-4 rounded-full bg-discord-success ">
-                      &nbsp;
-                    </span>
-                    role
-                  </div>
+                <div className="flex -mx-1 -mb-2 flex-wrap">
+                  <Role color="red" title="admin" />
+                  <Role color="blue" title="moderator" />
+                  <Role color="green" title="trusted" />
+                  <Role color="yellow" title="donator" />
+                  <Role color="orange" title="developer" />
                 </div>
               </div>
             </div>
@@ -134,10 +88,14 @@ const Home = () => {
       </div>
       <div className="py-8 sm:py-10 md:py-12">
         <div className="container">
-          <p className="text-discord-600 font-medium text-lg lg:w-5/6 pb-8">
-            Maybe these ones will help?
-          </p>
-          <a href="template1" className="row -mb-8">
+          <div className="row">
+            <div className="col">
+              <p className="text-discord-600 font-medium text-lg pb-8">
+                Maybe these ones will help?
+              </p>
+            </div>
+          </div>
+          <div className="row -mb-8">
             <TemplateCard
               title="Lorem ipsum"
               name="Tom Cook"
@@ -168,7 +126,7 @@ const Home = () => {
               downloads={123}
               likes={47}
             />
-          </a>
+          </div>
         </div>
       </div>
     </>
