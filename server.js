@@ -67,33 +67,32 @@ app.prepare().then(() =>{
             oauth.getUser(result.access_token).then((user_data)=>{
               console.log(user_data);
               req.session.username = user_data.username;
-              req.session.profile_picture = "https://cdn.discordapp.com/avatars/" + user_data.id + "/" + user_data.avatar + ".jpeg"
+              req.session.profile_pic = "https://cdn.discordapp.com/avatars/" + user_data.id + "/" + user_data.avatar + ".jpeg"
               // Check if user is already in database, if not, add him/her (can be done in background)
 
-              database.connect((err) => {
+              //database.connect((err) => {
 
-                if ( err ) throw err;
+                //if ( err ) throw err;
 
                 // console.log("connected!");
 
-                database.query("select * from discordstyle.users where discord_id="+ user_data.id, (err, result) =>{
+              database.query("select * from discordstyle.users where discord_id="+ user_data.id, (err, result) =>{
 
-                  if (err) throw err;
+                if (err) throw err;
 
                   // If i dont get a result of 1 or "more", i should add them
-                  if(!result.length>0){
-                    database.query("insert into discordstyle.users(discord_id, username, profile_created, profile_pic) values ('"+user_data.id+"','"+user_data.username+"','"+Date.now()+"','"+ req.session.profile_picture +"')", (err, result)=>{
-                        if (err) throw err;
-
-                        console.log("added user ");
-                    })
-                  }
+                if(!result.length>0){
+                  database.query("insert into discordstyle.users(discord_id, username, profile_created, profile_pic) values ('"+user_data.id+"','"+user_data.username+"','"+Date.now()+"','"+ req.session.profile_pic +"')", (err, result)=>{
+                      if (err) throw err;
+                      console.log("added user ");
+                  })
+                }
 
                   //console.log("Result: " + result);
 
-                });
+              });
 
-              })
+              //})
 
               req.session.loggedin = true;
               res.redirect("/");
@@ -125,8 +124,25 @@ app.prepare().then(() =>{
 
   })
 
+  // Self explainatory ( can you remove one function, and make this hackable? lol )
   server.get('/users/:id', (req,res) => {
-    res.send(req.params.id);
+
+    //database.connect((err) =>{
+    //  if (err) throw err;
+
+    database.query("select * from discordstyle.users where user_id="+parseInt(req.params.id), (err, result)=>{
+
+      if (err) throw err;
+      if(result.length>0){
+        var data=result[0];
+        res.send(JSON.stringify(data));
+      }else{
+        res.send("User does not exist");
+      }
+
+    })
+
+    //})
   })
 
   // let next handle the rest, to make it easy for the rest of you
