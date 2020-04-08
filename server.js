@@ -8,6 +8,7 @@ const app = next ({dev})
 const handle = app.getRequestHandler()
 const port = 3000
 const session = require('express-session')
+const request = require('request');
 
 // Discord oauth variables
 const oauth = new DiscordOauth2();
@@ -121,6 +122,19 @@ app.prepare().then(() =>{
 
   server.get('/templates/:id', (req, res) => {
     res.send(req.params.id);
+
+  })
+
+ // gets contents from template links
+  server.get('/api/template/:id', (req,res) => {
+    request.get("https://discordapp.com/api/v6/guilds/templates/"+req.params.id, (err, resp, body) => {
+      if (!err && resp.statusCode == 200){
+        res.send(body);
+      }else{
+        res.send("file dosent exist");
+      }
+
+    })
 
   })
 
