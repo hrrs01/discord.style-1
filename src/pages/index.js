@@ -1,6 +1,5 @@
 import { attributes } from '~/content/home.md'
 import TemplateCard from '~/components/TemplateCard'
-
 const { heading, leading } = attributes
 
 const Plus = (props) => (
@@ -87,5 +86,6 @@ const Home = () => {
     </>
   )
 }
+
 
 export default Home

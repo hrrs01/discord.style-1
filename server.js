@@ -109,7 +109,13 @@ app.prepare().then(() =>{
         res.redirect("https://discordapp.com/api/oauth2/authorize?client_id=697087272050229339&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Flogin&response_type=code&scope=identify");
       }else{
       // if logged in, why are they here
-        res.redirect("/");
+        var data = {
+            loggedin: req.session.loggedin,
+            username: req.session.username,
+            profile_pic: req.session.profile_pic
+
+        };
+        res.send(JSON.stringify(data));
       }
     }
 
