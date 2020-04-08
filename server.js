@@ -63,19 +63,13 @@ app.prepare().then(() =>{
 
       // Have to grant login or not when the response is acctually recieved
       }).then((result)=>{
-          if(typeof result.access_token !== 'undefined'){
+          if(isset(result.access_token)){
             // Get user info
             oauth.getUser(result.access_token).then((user_data)=>{
               console.log(user_data);
               req.session.username = user_data.username;
               req.session.profile_pic = "https://cdn.discordapp.com/avatars/" + user_data.id + "/" + user_data.avatar + ".jpeg"
               // Check if user is already in database, if not, add him/her (can be done in background)
-
-              //database.connect((err) => {
-
-                //if ( err ) throw err;
-
-                // console.log("connected!");
 
               database.query("select * from discordstyle.users where discord_id="+ user_data.id, (err, result) =>{
 
@@ -88,8 +82,6 @@ app.prepare().then(() =>{
                       console.log("added user ");
                   })
                 }
-
-                  //console.log("Result: " + result);
 
               });
 
@@ -126,13 +118,46 @@ app.prepare().then(() =>{
     res.redirect("/")
   })
 
+
+  server.get("/templates", (req,res) => {
+      /*
+      params = {
+        sort_by = posted | votes | views
+      }
+      */
+      sort_by = "";
+      if(isset(req.params.sort_by)){
+
+      }else{
+
+      }
+
+  })
+
   server.get('/templates/:id', (req, res) => {
+    /*
+    params = {
+      id = an integer refering to the id of the template ( in our database )
+
+    }
+    */
     res.send(req.params.id);
 
   })
 
  // gets contents from template links
   server.get('/api/template/:id', (req,res) => {
+
+    /*
+    params = {
+      id = an integer refering to the id of the template ( in discords system )
+
+    }
+
+    example :  https://discord.new/2ar44SuZ5vzA
+                                  |-----------|
+    */
+
     request.get("https://discordapp.com/api/v6/guilds/templates/"+req.params.id, (err, resp, body) => {
       if (!err && resp.statusCode == 200){
         res.send(body);
@@ -146,6 +171,12 @@ app.prepare().then(() =>{
 
   // Self explainatory ( can you remove one function, and make this hackable? lol )
   server.get('/users/:id', (req,res) => {
+
+    /*
+    params = {
+      id = an integer refering to the id of the user ( in our database )
+    }
+    */
 
     //database.connect((err) =>{
     //  if (err) throw err;
@@ -179,3 +210,7 @@ app.prepare().then(() =>{
   })
 
 });
+
+function isset(x){
+  return typeof x !== 'undefined'
+}
