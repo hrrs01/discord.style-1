@@ -61,13 +61,17 @@ const Header = () => {
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex">
                     {nav.map(({ title, url }, i) => (
+                      <Link href={url}>
                       <a
-                        href={url}
+
                         key={i}
                         className="ml-6 py-3 rounded-md text-base font-medium leading-5 text-gray-300 hover:text-white focus:outline-none focus:text-white transition duration-150 ease-in-out relative fancy-underline"
                       >
-                        {title}
+                      {title}
                       </a>
+                      </Link>
+
+
                     ))}
                   </div>
                 </div>
